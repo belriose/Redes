@@ -178,8 +178,93 @@ Se prob'o esta funcionalidad con diferentes direcciones de IP, para analizar el 
 \subsection{Segunda consigna: Capturando tr'afico}
 \label{expli1:}
 
+Para la primera parte se nos ped'ia realizar un programa que escuche en la red por un per'iodo de tiempo y capture los mensajes ARP que circulen por la misma.
+
+\vspace*{5 mm}
+
+Para ello utilizamos la funci'on de Scapy \texttt{sniff} de la siguiente manera:
+
+\vspace*{5 mm}
+
+\texttt{sniff(prn=arp\_monitor\_callback, filter=''arp'', store=0)}
+
+\vspace*{5 mm}
+
+El par'ametro \texttt{store} se setea en 0 para que la funci'on \texttt{sniff()} no guarde nada (como lo har'ia de otra manera) y por lo tanto corra de forma ilimitada. El par'ametro \texttt{filter} se usa para mejorar la performance cuando hay alta carga de datos: El filtro se aplica dentro del kernel, por lo que Scapy s'olo ver'a trafico ARP.
+
+\vspace*{5 mm}
+
+La funci'on callback \texttt{arp\_monitor\_callback} se aplica a los paquetes que se sniffean, y se define asi:
+
+\vspace*{5 mm}
+
+\texttt{def arp\_monitor\_callback(pkt):}
+
+\hspace*{3 mm}	\texttt{global salida}
+	
+\hspace*{3 mm}	\texttt{if ARP in pkt and pkt[ARP].op in (1,2):}
+		
+\hspace*{6 mm}			\texttt{salida.write(pkt.sprintf(''\%ARP.hwsrc\% \%ARP.psrc\% \%ARP.hwdst\% \%ARP}
+			
+\hspace*{6 mm}			\texttt{.pdst\% '')+str(datetime.now())+'$\setminus$ n')}
+			
+\hspace*{6 mm}			\texttt{return pkt.sprintf(''\%ARP.hwsrc\% \%ARP.psrc\% \%ARP.hwdst\% \%ARP.pdst\%'')}
+
+\vspace*{5 mm}
+
+La idea es que si los paquetes ARP son de tipo \texttt{who-has} o \texttt{is-at}, guarda en el archivo de salida y muestra por pantalla los datos de MAC source, IP source, MAC dest e IP dest. Datos que podr'an usarse luego para obtener informaci'on de la red.
+
+\vspace*{5 mm}
+
+Para la segunda parte de esta consigna se pide analizar la entrop'ia de la red. Para esto primero se dej'o corriendo el script anterior para capturar una buena cantidad de paquetes ARP en una red con tr'afico considerable. El lapso de tiempo usado para la captura fue de 2 horas. 
+
+\vspace*{5 mm}
+
+Se plantearon tres diferentes modelos para la fuente de informaci'on: En el primero, se defini'o como conjunto de s'imbolos a las direcciones de IP destino que aparecieran en los paquetes ARP capturados. La idea ser'ia la de poder distinguir direcciones muy solicitadas de otras poco buscadas. El segundo modelo una como s'imbolos a las direcciones de IP origen. Esta vez la idea es caracterizar a los nodos por generar gran cantidad o poca cantidad de requests ARP. Por ultimo se plante'o utilizar como s'imbolos a los pares de direcciones IP origen - destino. En este caso se podr'ia detectar nodos que se buscan entr'e si de forma m'as frecuente que el resto. 
+
+\vspace*{5 mm}
+
+ACA EXPLICAR BREVEMENTE EL CALCULO DE ENTROPIA DEL CODIGO
+
 \subsection{Tercera consigna: Gr'aficos y an'alisis}
 \label{expli1:}
+
+\begin{figure}[!hbp]
+\begin{center}
+\includegraphics[width=11cm]{ActividadIPsSolicitadas.eps}
+\end{center}
+\caption{Actividad IPs solicitadas} \label{figura2}
+\end{figure}
+
+\begin{figure}[!hbp]
+\begin{center}
+\includegraphics[width=11cm]{HistIPsSolicitadas.eps}
+\end{center}
+\caption{Histograma IPs solicitadas} \label{figura3}
+\end{figure}
+
+\begin{figure}[!hbp]
+\begin{center}
+\includegraphics[width=11cm]{ActividadIPsOrigen.eps}
+\end{center}
+\caption{Actividad IPs solicitantes} \label{figura4}
+\end{figure}
+
+\begin{figure}[!hbp]
+\begin{center}
+\includegraphics[width=11cm]{HistIPsOrigen.eps}
+\end{center}
+\caption{Histograma IPs solicitantes} \label{figura5}
+\end{figure}
+
+%\begin{figure}[!hbp]
+%\begin{center}
+%\includegraphics[width=11cm]{oficina_topologia_plain.eps}
+%\end{center}
+%\caption{Topolog'ia de la red analizada} \label{figura6}
+%\end{figure}
+
+\clearpage
 
 \section{Resultados}
 \label{resultados1:}
