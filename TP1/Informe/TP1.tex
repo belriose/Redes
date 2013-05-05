@@ -233,16 +233,16 @@ Para la segunda parte de esta consigna se pide analizar la entrop'ia de la red. 
 
 \vspace*{5 mm}
 
-Se plantearon tres diferentes modelos para la fuente de informaci'on: En el primero, se defini'o como conjunto de s'imbolos a las direcciones de IP destino que aparecieran en los paquetes ARP capturados. La idea ser'ia la de poder distinguir direcciones muy solicitadas de otras poco buscadas. El segundo modelo una como s'imbolos a las direcciones de IP origen. Esta vez la idea es caracterizar a los nodos por generar gran cantidad o poca cantidad de requests ARP. Por ultimo se plante'o utilizar como s'imbolos a los pares de direcciones IP origen - destino. En este caso se podr'ia detectar nodos que se buscan entr'e si de forma m'as frecuente que el resto. 
+Se plantearon dos diferentes modelos para la fuente de informaci'on: En el primero, se defini'o como conjunto de s'imbolos a las direcciones de IP destino que aparecieran en los paquetes ARP capturados. La idea ser'ia la de poder distinguir direcciones muy solicitadas de otras poco buscadas. El segundo modelo una como s'imbolos a las direcciones de IP origen. Esta vez la idea es caracterizar a los nodos por generar gran cantidad o poca cantidad de requests ARP.
 
 \vspace*{5 mm}
 
-Para cada modelo el calculo consiste en calcular la probabilidad estad'istica de cada simbolo sobre el total y en base a eso obtener la informaci'on de cada s'imbolo y la entrop'ia de la fuente con las formuladas presentadas en la secci'on de desarrollo.
+Para cada modelo el calculo consiste en obtener la probabilidad estad'istica de cada simbolo sobre el total y en base a eso obtener la informaci'on de cada s'imbolo y la entrop'ia de la fuente con las f'ormulas presentadas en la secci'on de desarrollo.
 
 \subsection{Tercera consigna: Gr'aficos y an'alisis}
 \label{expli1:}
 
-Nota: solo se expondr'an los s'imbolos m'as distinguidos basados en la informaci'on del mismo y la entrop'ia de la fuente, debido a la gran cantidad de ips. \\
+Nota: solo se expondr'an los s'imbolos m'as distinguidos basados en la informaci'on del mismo y la entrop'ia de la fuente, debido a la gran cantidad de IPs. \\
 
 \subsubsection{Modelo 1: direcciones IP destino como s'imbolos}
 
@@ -325,20 +325,46 @@ IP origen	&	Informaci'on	\\	\hline
 
 \clearpage
 
-\section{Resultados}
-\label{resultados1:}
+\section{An'alisis de resultados}
+\label{analisis1:}
 
 \subsubsection{Modelo 1: direcciones IP destino como s'imbolos}
 
+Segun el histograma de IPs destino, las m'as solicitadas son: 9.6.162.1, 9.6.162.126, 9.6.162.223 y 9.6.162.15. En el gr'afico de actividad en el tiempo, se ve que se solicitan en forma aproximadamente constante durante el transcurso de la captura de paquetes, salvo 9.6.162.15 que a los aprox. 5000 s deja de ser tan solicitada. 
+
+Si buscamos dichos nodos en el gr'afico dirigido de la red, vemos lo siguiente: 
+
+\begin{itemize}
+	\item El nodo 9.6.162.1 recibe flechas desde casi todos los dem'as nodos. Esto nos indica que muy probablemente se trate del router.
+	\item El nodo 9.6.162.15 es buscada desde los nodos 9.6.162.3 y 9.6.162.4.
+	\item Los nodos 9.6.162.126 y 9.6.162.223 solo est'an conectados con si mismo. Es decir, lo unico que hacen es mandar ARP con su propia IP en broadcast a todos, como anunci'andose.
+\end{itemize}
+
+Con respecto al 'ultimo item, el que un nodo mande ARP con su IP, es un buen m'etodo para encontrar potenciales IPs duplicadas:
+
+Si el nodo no obtiene respuesta, entonces es el 'unico en la red con ese IP. Si recibe respuesta, quiere decir que hay otra computadora con la misma IP, lo que es un problema.
+
+Adem'as, esto permite al router y vecinos actualizar sus tablas ARP para que puedan comunicarse con dicho nodo. 
+
+Sin embargo, no nos queda claro por qu'e ambos nodos tienen este comportamiento de manera constante durante toda la captura de paquetes.
+
 \subsubsection{Modelo 2: direcciones IP origen como s'imbolos}
 
-\section{An'alisis de resultados}
-\label{analisis1:}
+Segun el histograma de IPs origen, las m'as solicitadas son: 9.6.162.3, 9.6.162.126 y 9.6.162.223 y 9.6.162.15.
+
+No es sorpresa ver a las 'ultimas 2 IPs, ya que del an'alisis anterior surge que son nodos que no pararon de mandar ARP con su propia IP.
+
+El nodo 9.6.162.3 sin embargo, presenta gran actividad y se conecta con varios nodos. Uno de los nodos con los que m'as interacci'on tiene es el 9.6.162.15. Esto ayuda a explicar por qu'e el nodo 9.6.162.15 aparece tantas veces como destino, en el gr'afico del caso anterior. Sin embargo no pudimos explicar por qu'e este nodo en particular posee tanta actividad.
+
+Algo particular que tambi'en se puede observar en los g'aficos, es que aparece la IP 0.0.0.0 como nodo origen. Esto podr'ia explicarse si se tratara de nodos que a'un no ten'ian otorgada una direcci'on IP.
 
 \section{Conclusiones}
 \label{conclusion1:}
 
 \begin{thebibliography}{99}
+	\item Computer Networks - A Systems Approach 5th ed. - L. Peterson, et. al
+	\item http://es.wikipedia.org/wiki/Entrop'ia\_(informaci'on)
+	\item http://serverfault.com/questions/219837/why-my-laptop-sends-arp-request-to-itself 
 \end{thebibliography}
 
 \end{document}
