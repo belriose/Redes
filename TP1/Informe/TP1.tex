@@ -1,8 +1,8 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage{fancyhdr}
 \usepackage[spanish,activeacute]{babel}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+%usepackage{algorithm}
+%\usepackage{algpseudocode}
 \pagestyle{fancy}
 \frenchspacing
 \usepackage[dvips]{graphicx}
@@ -10,23 +10,27 @@
 \usepackage{colortbl}
 \usepackage{amssymb}
 \usepackage{caratula}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{float}
 
 %Colores
 \definecolor{tcA}{gray}{0.90}
 
 %Traducción de instrucciones
-\algrenewcommand\algorithmicwhile{\textbf{mientras}}
-\algrenewcommand\algorithmicdo{\textbf{hacer}}
-\algrenewcommand\algorithmicend{\textbf{fin}}
-\algrenewcommand\algorithmicprocedure{\textbf{Procedimiento}}
-\algrenewcommand\algorithmicfor{\textbf{para}}
-\algrenewcommand\algorithmicif{\textbf{si}}
-\algrenewcommand\algorithmicelse{\textbf{sino}}
-\algrenewcommand\algorithmicthen{\textbf{entonces}}
-\algrenewcommand\algorithmicfunction{\textbf{Funci\'on}}
-\algnewcommand\algorithmicto{\textbf{hasta}}
+%\algrenewcommand\algorithmicwhile{\textbf{mientras}}
+%\algrenewcommand\algorithmicdo{\textbf{hacer}}
+%\algrenewcommand\algorithmicend{\textbf{fin}}
+%\algrenewcommand\algorithmicprocedure{\textbf{Procedimiento}}
+%\algrenewcommand\algorithmicfor{\textbf{para}}
+%\algrenewcommand\algorithmicif{\textbf{si}}
+%\algrenewcommand\algorithmicelse{\textbf{sino}}
+%\algrenewcommand\algorithmicthen{\textbf{entonces}}
+%\algrenewcommand\algorithmicfunction{\textbf{Funci\'on}}
+%\algnewcommand\algorithmicto{\textbf{hasta}}
 
-\lhead{\textbf{TP 1}}
+\lhead{\textbf{Teoría de las comunicaciones - TP1}}
 \rhead{Capello - Hernandez - Laurito}
 \lfoot{Taller de Wiretapping}
 \rfoot{\thepage}
@@ -47,7 +51,7 @@
 \grupo{Grupo:}
 \integrante{Mat\'ias Capello}{006/02}{matiascapello@gmail.com}
 \integrante{Santiago Hern'andez}{48/11}{santi-hernandez@hotmail.com}
-\integrante{Andr'es Laurito}{/}{andy.laurito@hotmail.com}
+\integrante{Andr'es Laurito}{27/11}{andy.laurito@hotmail.com}
 
 \begin{titlepage}
 \maketitle
@@ -80,10 +84,10 @@ El objetivo de este trabajo pr'actico es abordar algunas nociones de nivel de en
 
 \subsection{ARP - Address Resolution Protocol}
 
-El protocolo \textbf{ARP} tiene un papel clave entre los protocolos de capa de Internet relacionados con el protocolo TCP/IP, ya que permite que se conozca la direcci'on f'isica de una tarjeta de interfaz de red correspondiente a una direcci�n IP. Por eso se llama Protocolo de Resoluci'on de Direcci'on (en ingl'es \textbf{ARP} significa Address Resolution Protocol).
+El protocolo \textbf{ARP} tiene un papel clave entre los protocolos de capa de Internet relacionados con el protocolo TCP/IP, ya que permite que se conozca la direcci'on f'isica de una tarjeta de interfaz de red correspondiente a una direcci'on IP. Por eso se llama Protocolo de Resoluci'on de Direcci'on (en ingl'es \textbf{ARP} significa Address Resolution Protocol).
 
 \vspace*{5 mm}
-Cada equipo conectado a la red tiene un n'umero de identificaci�n de 48 bits. 'Este es un n'umero 'unico establecido en la f'abrica en el momento de fabricaci'on de la tarjeta. Sin embargo, la comunicaci'on en Internet no utiliza directamente este n'umero (ya que las direcciones de los equipos deber'ian cambiarse cada vez que se cambia la tarjeta de interfaz de red), sino que utiliza una direcci�n l'ogica asignada por un organismo: la direcci'on IP.
+Cada equipo conectado a la red tiene un n'umero de identificaci'on de 48 bits. 'Este es un n'umero 'unico establecido en la f'abrica en el momento de fabricaci'on de la tarjeta. Sin embargo, la comunicaci'on en Internet no utiliza directamente este n'umero (ya que las direcciones de los equipos deber'ian cambiarse cada vez que se cambia la tarjeta de interfaz de red), sino que utiliza una direcci'on l'ogica asignada por un organismo: la direcci'on IP.
 
 \vspace*{5 mm}
 Para que las direcciones f'isicas se puedan conectar con las direcciones l'ogicas, el protocolo \textbf{ARP} interroga a los equipos de la red para averiguar sus direcciones f'isicas y luego crea una tabla de b'usqueda entre las direcciones l'ogicas y f'isicas en una memoria cach'e.
@@ -92,13 +96,12 @@ Para que las direcciones f'isicas se puedan conectar con las direcciones l'ogica
 Cuando un equipo debe comunicarse con otro, consulta la tabla de b'usqueda. Si la direcci'on requerida no se encuentra en la tabla, el protocolo \textbf{ARP} env'ia una solicitud a la red. Todos los equipos en la red comparan esta direcci'on l'ogica con la suya. Si alguno de ellos se identifica con esta direcci'on, el equipo responder'a al \textbf{ARP}, que almacenar'a el par de direcciones en la tabla de b'usqueda, y, a continuaci'on, podr'a establecerse la comunicaci'on. 
 
 \vspace*{5 mm}
-La Figura 1 muestra el formato del paquete \textbf{ARP} para el mapero de direcci'on IP-a-Ethernet. De hecho, \textbf{ARP} puede ser utilizado para muchos otros tipos de mapeos �
-las mayores diferencias se dan en los tama\~nos de direcci'on. Adem'as de los OP y las direcciones de capa de enlace de ambos origen y destino, el paquete contiene:
+La Figura 1 muestra el formato del paquete \textbf{ARP} para el mapero de direcci'on IP-a-Ethernet. De hecho, \textbf{ARP} puede ser utilizado para muchos otros tipos de mapeos las mayores diferencias se dan en los tama\~nos de direcci'on. Adem'as de los OP y las direcciones de capa de enlace de ambos origen y destino, el paquete contiene:
 
 \begin{itemize}
 	\item Un campo HardwareType, que especifica el tipo de red f'isica (por ejemplo, Ethernet).
 	\item Un campo ProtocolType, que especifica el protocolo de la capa superior (por ejemplo, IP).
-	\item Campos HLen (�hardware� address length) y PLen (�protocol� address length), que especifican las longitudes de la direcci'on de capa de enlace y la direcci'on de la capa superior, respectivamente.
+	\item Campos HLen (hardware address length) y PLen (protocol address length), que especifican las longitudes de la direcci'on de capa de enlace y la direcci'on de la capa superior, respectivamente.
 	\item Un campo Operation, que especifica si se trata de una solicitud o una respuesta.
 	\item Las direcciones de origen y destino del hardware (Ethernet) y protocolo (IP).
 \end{itemize}
@@ -130,7 +133,7 @@ Shannon ofrece una definici'on de entrop'ia que satisface las siguientes afirmac
 
 \subsubsection{Definici'on Formal}
 
-Supongamos que un fen'omeno (variable aleatoria) tiene un grado de indeterminaci'on inicial igual a k (k estados posibles) y supongamos todos los estados equiprobables, entonces la probabilidad p de que se d'e una de esas combinaciones ser'a 1/k. Podemos representar entonces la expresi�n  $c_{i}$ como:
+Supongamos que un fen'omeno (variable aleatoria) tiene un grado de indeterminaci'on inicial igual a k (k estados posibles) y supongamos todos los estados equiprobables, entonces la probabilidad p de que se d'e una de esas combinaciones ser'a 1/k. Podemos representar entonces la expresi'on  $c_{i}$ como:
 
 \vspace*{5 mm}
 $c_{i} = log_{2}(k) = log_{2}\left[ 1 \div (1 \div k)\right] = -log_{2}(p)$
@@ -239,6 +242,31 @@ Para cada modelo el calculo consiste en calcular la probabilidad estad'istica de
 \subsection{Tercera consigna: Gr'aficos y an'alisis}
 \label{expli1:}
 
+Nota: solo se expondr'an los s'imbolos m'as distinguidos basados en la informaci'on del mismo y la entrop'ia de la fuente, debido a la gran cantidad de ips. \\
+
+\subsubsection{Modelo 1: direcciones IP destino como s'imbolos}
+
+Entropia de la red: 3.39847619304	\\
+
+\noindent \begin{tabular}{| c | c | c | c | r} \hline
+IP destino	&	Informaci'on	\\	\hline
+9.6.162.15	 & 	1.74553111348	 \\ \hline 
+9.6.162.1	 & 	1.85952788434	 \\ \hline 
+...	&	...	\\ \hline
+9.6.162.179	 & 	10.6733090756	 \\ \hline 
+9.6.162.138	 & 	10.6733090756	 \\ \hline 
+9.6.162.133	 & 	10.6733090756	 \\ \hline 
+9.6.162.173	 & 	10.6733090756	 \\ \hline 
+9.6.162.87	 & 	10.6733090756	 \\ \hline 
+192.168.1.3	 & 	10.6733090756	 \\ \hline 
+9.6.162.26	 & 	10.6733090756	 \\ \hline 
+9.6.162.60	 & 	10.6733090756	 \\ \hline 
+9.6.162.63	 & 	10.6733090756	 \\ \hline 
+9.6.162.103	 & 	10.6733090756	 \\ \hline 
+\end{tabular}
+
+\newpage
+
 \begin{figure}[!hbp]
 \begin{center}
 \includegraphics[width=11cm]{ActividadIPsSolicitadas.eps}
@@ -252,6 +280,26 @@ Para cada modelo el calculo consiste en calcular la probabilidad estad'istica de
 \end{center}
 \caption{Histograma IPs solicitadas} \label{figura3}
 \end{figure}
+
+\newpage
+
+\subsubsection{Modelo 2: direcciones IP origen como s'imbolos}
+
+Entropia de la red: 3.71219167365	\\
+
+\noindent \begin{tabular}{| c | c | c | c | r} \hline
+IP origen	&	Informaci'on	\\	\hline
+9.6.162.3	 & 	1.25545656068	 \\ \hline 
+...	&	...	\\ \hline
+9.6.162.12	 & 	9.08834657484	 \\ \hline 
+9.6.162.62	 & 	9.08834657484	 \\ \hline 
+9.6.162.15	 & 	9.67330907556	 \\ \hline 
+9.6.162.221	 & 	9.67330907556	 \\ \hline 
+9.6.162.150	 & 	9.67330907556	 \\ \hline 
+192.168.1.3	 & 	10.6733090756	 \\ \hline 
+\end{tabular}	
+
+\newpage
 
 \begin{figure}[!hbp]
 \begin{center}
@@ -267,6 +315,7 @@ Para cada modelo el calculo consiste en calcular la probabilidad estad'istica de
 \caption{Histograma IPs solicitantes} \label{figura5}
 \end{figure}
 
+\newpage
 %\begin{figure}[!hbp]
 %\begin{center}
 %\includegraphics[width=11cm]{oficina_topologia_plain.eps}
@@ -278,6 +327,10 @@ Para cada modelo el calculo consiste en calcular la probabilidad estad'istica de
 
 \section{Resultados}
 \label{resultados1:}
+
+\subsubsection{Modelo 1: direcciones IP destino como s'imbolos}
+
+\subsubsection{Modelo 2: direcciones IP origen como s'imbolos}
 
 \section{An'alisis de resultados}
 \label{analisis1:}
