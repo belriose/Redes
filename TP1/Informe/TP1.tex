@@ -26,7 +26,7 @@
 \algrenewcommand\algorithmicfunction{\textbf{Funci\'on}}
 \algnewcommand\algorithmicto{\textbf{hasta}}
 
-\lhead{\textbf{TP 2}}
+\lhead{\textbf{TP 1}}
 \rhead{Capello - Hernandez - Laurito}
 \lfoot{Taller de Wiretapping}
 \rfoot{\thepage}
@@ -46,7 +46,7 @@
 %\subtitulo{}
 \grupo{Grupo:}
 \integrante{Mat\'ias Capello}{006/02}{matiascapello@gmail.com}
-\integrante{Santiago Hern'andez}{/}{santi-hernandez@hotmail.com}
+\integrante{Santiago Hern'andez}{48/11}{santi-hernandez@hotmail.com}
 \integrante{Andr'es Laurito}{/}{andy.laurito@hotmail.com}
 
 \begin{titlepage}
@@ -80,10 +80,10 @@ El objetivo de este trabajo pr'actico es abordar algunas nociones de nivel de en
 
 \subsection{ARP - Address Resolution Protocol}
 
-El protocolo \textbf{ARP} tiene un papel clave entre los protocolos de capa de Internet relacionados con el protocolo TCP/IP, ya que permite que se conozca la direcci'on f'isica de una tarjeta de interfaz de red correspondiente a una dirección IP. Por eso se llama Protocolo de Resoluci'on de Direcci'on (en ingl'es \textbf{ARP} significa Address Resolution Protocol).
+El protocolo \textbf{ARP} tiene un papel clave entre los protocolos de capa de Internet relacionados con el protocolo TCP/IP, ya que permite que se conozca la direcci'on f'isica de una tarjeta de interfaz de red correspondiente a una direcciï¿½n IP. Por eso se llama Protocolo de Resoluci'on de Direcci'on (en ingl'es \textbf{ARP} significa Address Resolution Protocol).
 
 \vspace*{5 mm}
-Cada equipo conectado a la red tiene un n'umero de identificación de 48 bits. 'Este es un n'umero 'unico establecido en la f'abrica en el momento de fabricaci'on de la tarjeta. Sin embargo, la comunicaci'on en Internet no utiliza directamente este n'umero (ya que las direcciones de los equipos deber'ian cambiarse cada vez que se cambia la tarjeta de interfaz de red), sino que utiliza una dirección l'ogica asignada por un organismo: la direcci'on IP.
+Cada equipo conectado a la red tiene un n'umero de identificaciï¿½n de 48 bits. 'Este es un n'umero 'unico establecido en la f'abrica en el momento de fabricaci'on de la tarjeta. Sin embargo, la comunicaci'on en Internet no utiliza directamente este n'umero (ya que las direcciones de los equipos deber'ian cambiarse cada vez que se cambia la tarjeta de interfaz de red), sino que utiliza una direcciï¿½n l'ogica asignada por un organismo: la direcci'on IP.
 
 \vspace*{5 mm}
 Para que las direcciones f'isicas se puedan conectar con las direcciones l'ogicas, el protocolo \textbf{ARP} interroga a los equipos de la red para averiguar sus direcciones f'isicas y luego crea una tabla de b'usqueda entre las direcciones l'ogicas y f'isicas en una memoria cach'e.
@@ -92,13 +92,13 @@ Para que las direcciones f'isicas se puedan conectar con las direcciones l'ogica
 Cuando un equipo debe comunicarse con otro, consulta la tabla de b'usqueda. Si la direcci'on requerida no se encuentra en la tabla, el protocolo \textbf{ARP} env'ia una solicitud a la red. Todos los equipos en la red comparan esta direcci'on l'ogica con la suya. Si alguno de ellos se identifica con esta direcci'on, el equipo responder'a al \textbf{ARP}, que almacenar'a el par de direcciones en la tabla de b'usqueda, y, a continuaci'on, podr'a establecerse la comunicaci'on. 
 
 \vspace*{5 mm}
-La Figura 1 muestra el formato del paquete \textbf{ARP} para el mapero de direcci'on IP-a-Ethernet. De hecho, \textbf{ARP} puede ser utilizado para muchos otros tipos de mapeos —
+La Figura 1 muestra el formato del paquete \textbf{ARP} para el mapero de direcci'on IP-a-Ethernet. De hecho, \textbf{ARP} puede ser utilizado para muchos otros tipos de mapeos ï¿½
 las mayores diferencias se dan en los tama\~nos de direcci'on. Adem'as de los OP y las direcciones de capa de enlace de ambos origen y destino, el paquete contiene:
 
 \begin{itemize}
 	\item Un campo HardwareType, que especifica el tipo de red f'isica (por ejemplo, Ethernet).
 	\item Un campo ProtocolType, que especifica el protocolo de la capa superior (por ejemplo, IP).
-	\item Campos HLen (“hardware” address length) y PLen (“protocol” address length), que especifican las longitudes de la direcci'on de capa de enlace y la direcci'on de la capa superior, respectivamente.
+	\item Campos HLen (ï¿½hardwareï¿½ address length) y PLen (ï¿½protocolï¿½ address length), que especifican las longitudes de la direcci'on de capa de enlace y la direcci'on de la capa superior, respectivamente.
 	\item Un campo Operation, que especifica si se trata de una solicitud o una respuesta.
 	\item Las direcciones de origen y destino del hardware (Ethernet) y protocolo (IP).
 \end{itemize}
@@ -130,7 +130,7 @@ Shannon ofrece una definici'on de entrop'ia que satisface las siguientes afirmac
 
 \subsubsection{Definici'on Formal}
 
-Supongamos que un fen'omeno (variable aleatoria) tiene un grado de indeterminaci'on inicial igual a k (k estados posibles) y supongamos todos los estados equiprobables, entonces la probabilidad p de que se d'e una de esas combinaciones ser'a 1/k. Podemos representar entonces la expresión  $c_{i}$ como:
+Supongamos que un fen'omeno (variable aleatoria) tiene un grado de indeterminaci'on inicial igual a k (k estados posibles) y supongamos todos los estados equiprobables, entonces la probabilidad p de que se d'e una de esas combinaciones ser'a 1/k. Podemos representar entonces la expresiï¿½n  $c_{i}$ como:
 
 \vspace*{5 mm}
 $c_{i} = log_{2}(k) = log_{2}\left[ 1 \div (1 \div k)\right] = -log_{2}(p)$
@@ -163,16 +163,26 @@ Dentro de dicha funci'on se ejecuta lo siguiente:
 \texttt{mensajeARP = srp1(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=ip),timeout=2)}
 \vspace*{5 mm}
 
-Mediante srp1, se env'ia el paquete ARP en broadcast y se acepta solo la primer respuesta (suponemos que solo uno contesta). \texttt{Ether(dst="ff:ff:ff:ff:ff:ff")} es para mandarlo en modo broadcast y \texttt{ARP(pdst=ip)}, la IP de la que le pregunto su MAC Address.
+Mediante srp1, se env'ia el paquete ARP en broadcast y se acepta solo la primer respuesta (suponemos que solo uno contesta ya que solo uno deberÃ­a tener la ip). \texttt{Ether(dst="ff:ff:ff:ff:ff:ff")} es para mandarlo en modo broadcast y \texttt{ARP(pdst=ip)}, la IP de la que le pregunto su MAC Address.
 
 \vspace*{5 mm}
 Se prob'o esta funcionalidad con diferentes direcciones de IP, para analizar el resultado obtenido:
 
 \begin{itemize}
-	\item direcci'on inexistente: No hay respuesta, se cae por timeout.
-	\item direcci'on de la m'aquina origen: ???
-	\item direcci'on Broadcast: No hay respuesta, se cae por timeout.
-	\item alguna mas???
+	\item Direcci'on ip existente: Se obtiene la respuesta con la direcciÃ³n MAC.
+	\item Direcci'on ip inexistente: No hay respuesta, se cae por timeout.
+	\item Direcci'on ip de la m'aquina origen: No hay respuesta, se cae por timeout.
+	\item Direcci'on ip Broadcast: No hay respuesta, se cae por timeout.
+\end{itemize}
+
+Tambi'en se probaron los siguientes casos con scapy obteniendo estos resultados:
+
+\begin{itemize}
+	\item Direcci'on ip existente con su MAC address: Se obtiene la respuesta con la direcciÃ³n MAC.
+	\item Direcci'on ip existente con la MAC address "00:00:00:00:00:00": No hay respuesta, se cae por timeout.
+	\item Direcci'on ip existente con una MAC address distinta a la suya y a la de broadcast: No hay respuesta, se cae por timeout.
+	\item Direcci'on ip de nuestro router con nuestra MAC address y una IP distinta a la nuestra como source: Se obtiene la respuesta con la direcciÃ³n MAC normalmente. No notamos cambios.
+	\item Direcci'on ip equivocada a una MAC address conocida: No hay respuesta, se cae por timeout.
 \end{itemize}
 
 \subsection{Segunda consigna: Capturando tr'afico}
@@ -224,7 +234,7 @@ Se plantearon tres diferentes modelos para la fuente de informaci'on: En el prim
 
 \vspace*{5 mm}
 
-ACA EXPLICAR BREVEMENTE EL CALCULO DE ENTROPIA DEL CODIGO
+Para cada modelo el calculo consiste en calcular la probabilidad estad'istica de cada simbolo sobre el total y en base a eso obtener la informaci'on de cada s'imbolo y la entrop'ia de la fuente con las formuladas presentadas en la secci'on de desarrollo.
 
 \subsection{Tercera consigna: Gr'aficos y an'alisis}
 \label{expli1:}
