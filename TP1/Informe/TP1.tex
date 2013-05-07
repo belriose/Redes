@@ -6,6 +6,7 @@
 \pagestyle{fancy}
 \frenchspacing
 \usepackage[dvips]{graphicx}
+\usepackage[dvips]{geometry}
 \usepackage[usenames]{color}
 \usepackage{colortbl}
 \usepackage{amssymb}
@@ -271,14 +272,14 @@ IP destino	&	Informaci'on	\\	\hline
 
 \begin{figure}[!hbp]
 \begin{center}
-\includegraphics[width=11cm]{ActividadIPsSolicitadas.eps}
+\includegraphics[height=0.40\textheight,keepaspectratio]{ActividadIPsSolicitadas.eps}
 \end{center}
 \caption{Actividad IPs solicitadas} \label{figura2}
 \end{figure}
 
 \begin{figure}[!hbp]
 \begin{center}
-\includegraphics[width=11cm]{HistIPsSolicitadas.eps}
+\includegraphics[height=0.40\textheight,keepaspectratio]{HistIPsSolicitadas.eps}
 \end{center}
 \caption{Histograma IPs solicitadas} \label{figura3}
 \end{figure}
@@ -305,14 +306,14 @@ IP origen	&	Informaci'on	\\	\hline
 
 \begin{figure}[!hbp]
 \begin{center}
-\includegraphics[width=11cm]{ActividadIPsOrigen.eps}
+\includegraphics[height=0.40\textheight,keepaspectratio]{ActividadIPsOrigen.eps}
 \end{center}
 \caption{Actividad IPs solicitantes} \label{figura4}
 \end{figure}
 
 \begin{figure}[!hbp]
 \begin{center}
-\includegraphics[width=11cm]{HistIPsOrigen.eps}
+\includegraphics[height=0.40\textheight,keepaspectratio]{HistIPsOrigen.eps}
 \end{center}
 \caption{Histograma IPs solicitantes} \label{figura5}
 \end{figure}
@@ -374,6 +375,62 @@ Con respecto al c'alculo de la entrop'ia en los dos modelos planteados: Como vim
 	\item http://es.wikipedia.org/wiki/Entrop'ia\_(informaci'on)
 	\item http://serverfault.com/questions/219837/why-my-laptop-sends-arp-request-to-itself 
 \end{thebibliography}
+
+\newpage
+
+\section{Anexo A: C'odigo entregado}
+
+Junto al informe se entreg'o la captura de datos de la red analizada y el c'odigo pedido para completar las consignas y realizar el an'alisis. \\
+La entrega consiste en los siguientes archivos:
+\noindent \begin{enumerate}
+\item	redes.py: archivo principal que contiene las funciones para cumplir con las consignas.
+\item	analisis.py: contiene las funciones para el calculo de la entrop'ia y el gr'afico de los datos capturados.
+\item	\_\_init\_\_.py: archivo necesario por python.
+\item	oficina.txt: archivo con la captura de datos de la red analizada.
+\item	Figuras: carpeta con las figuras presentadas en el informe para mayor visibilidad. 
+\end{enumerate}
+Para utilizar el c'odigo entregado es necesario ejecutar \textbf{redes.py} el cual presenta el siguiente men'u:\\
+\textit{
+**************************************	\\
+Redes - wiretapping	\\
+1. Buscar MAC address de una ip	\\
+2. Sniffear paquetes ARP	\\
+3. Calcular entropia paquetes sniffeados	\\
+4. Graficar paquetes sniffeados	\\
+0. Salir, volver atras	\\
+**************************************	\\
+Opcion: 	\\
+}
+\noindent \begin{enumerate}
+\item	Se corresponde con la primer consigna del enunciado, pide una direcci'on de ip y al ingresarla busca la MAC asociada mediante un mensaje ARP.
+\item	Se corresponde con la segunda consigna del enunciado, pide el nombre del archivo de salida y guarda all'i los datos capturados de la red con el siguiente formato: "MAC origen" "IP origen" "MAC destino" "IP destino" "Tiempo". 
+\item	Pide como entrada un archivo con datos capturados de una red utilizando el formato de la opción 2 y genera archivos de salida con el c'alculo de la entrop'ia de la red. los, s'imbolos y la informaci'on de cada uno de ellos.
+\item	Genera histogramas, gr'aficos de actividad a lo largo del tiempo y de topolog'ia de la red, a partir de un archivo con datos capturados de una red.
+\end{enumerate}
+
+\noindent Requisitos:
+\noindent \begin{itemize}
+\item	Para utilizar las opciones 1 y 2 es necesario tener instalado \textbf{scapy}.
+\item	Para utilizar la opcion 4 es necesario tener los siguientes m'odulos de python instalados: \textbf{matplotlib}, \textbf{pydot}, \textbf{numpy} y \textbf{graphviz}.
+\end{itemize}
+
+\newpage
+
+% Achicar los margenes para que entre el grafico de topologia mejor
+\newgeometry{bottom=1cm,top=1cm}
+\thispagestyle{empty}
+\section{Anexo B: Topolog'ia de la red}
+
+\begin{figure}[!hbp]
+\begin{center}
+%\includegraphics[height=0.90\textheight,keepaspectratio]{topologia.png}
+\includegraphics[height=0.90\textheight,width=0.90\textwidth]{topologia.eps}
+\end{center}
+\caption{Topolog'ia de la red analizada} \label{figura6}
+\end{figure}
+
+% volver a tener margenes normales
+\restoregeometry
 
 \end{document}
 
