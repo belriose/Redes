@@ -70,13 +70,10 @@
 
 \section*{\centering Abstract}
 {\em
-Meter el resumen al final...
+En el presente trabajo se analizar'a el protocolo ARP. En la primera parte se muestra la implementaci'on de un cliente ARP, utilizando Scapy. Se realizan varias pruebas utilizando diferentes direcciones para ver que respuesta se obtiene. Para la segunda parte, se implementa una funci'on para escuchar pasivamente una red por un lapso de dos horas, capturando los mensajes ARP. En base a los datos recojidos, se definen dos modelos para el c'alculo de la entrop'ia de la red y se realizan gr'aficos que permiten analizarla: topol'ogico, histogramas y actividad en el tiempo. El primer modelo tiene como conjunto de s'imbolos las direcciones IP destino que aparecieron en los paquetes ARP capturados. En el segundo modelo, los s'imbolos son las direcciones de IP origen. Como resultado, se logr'o detectar varios nodos particulares: El router, algunos que s'olo realizan solicitudes con su propia IP en forma cont'inua, y otros con alta actividad.
 %end italics mode
 }
 \vspace*{5 mm}
-
-Palabras Clave: 
-
 
 \section{Introducci'on}
 \label{intro1:}
@@ -234,7 +231,7 @@ Para la segunda parte de esta consigna se pide analizar la entrop'ia de la red. 
 
 \vspace*{5 mm}
 
-Se plantearon dos diferentes modelos para la fuente de informaci'on: En el primero, se defini'o como conjunto de s'imbolos a las direcciones de IP destino que aparecieran en los paquetes ARP capturados. La idea ser'ia la de poder distinguir direcciones muy solicitadas de otras poco buscadas. El segundo modelo una como s'imbolos a las direcciones de IP origen. Esta vez la idea es caracterizar a los nodos por generar gran cantidad o poca cantidad de requests ARP.
+Se plantearon dos diferentes modelos para la fuente de informaci'on: En el primero, se defini'o como conjunto de s'imbolos a las direcciones de IP destino que aparecieran en los paquetes ARP capturados. La idea ser'ia la de poder distinguir direcciones muy solicitadas de otras poco buscadas. El segundo modelo usa como s'imbolos a las direcciones de IP origen. Esta vez la idea es caracterizar a los nodos por generar gran cantidad o poca cantidad de requests ARP.
 
 \vspace*{5 mm}
 
@@ -243,7 +240,7 @@ Para cada modelo el calculo consiste en obtener la probabilidad estad'istica de 
 \subsection{Tercera consigna: Gr'aficos y an'alisis}
 \label{expli1:}
 
-En primer lugar, con los datos recolectados generamos un grafo dirigido (red\_topologia.png) para visualizar la forma de nuestra red. Los nodos contienen las IPs de las maquinas involucradas y las aristas simbolizan un mensaje ARP donde el origen de la arista es la IP solicitante y el destino la IP solicitada del mensaje. (El grafo no se incluye en el informe por su gran tama\~no, pero est'a en la carpeta con los archivos entregados).
+En primer lugar, con los datos recolectados generamos un grafo dirigido (red\_topologia.png) para visualizar la forma de nuestra red. Los nodos contienen las IPs de las maquinas involucradas y las aristas simbolizan un mensaje ARP donde el origen de la arista es la IP solicitante y el destino la IP solicitada del mensaje.
 
 Nota: Para el siguiente an'alisis solo se expondr'an los s'imbolos m'as distinguidos basados en la informaci'on del mismo y la entrop'ia de la fuente, debido a la gran cantidad de IPs. \\
 
