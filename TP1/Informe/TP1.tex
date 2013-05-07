@@ -242,7 +242,9 @@ Para cada modelo el calculo consiste en obtener la probabilidad estad'istica de 
 \subsection{Tercera consigna: Gr'aficos y an'alisis}
 \label{expli1:}
 
-Nota: solo se expondr'an los s'imbolos m'as distinguidos basados en la informaci'on del mismo y la entrop'ia de la fuente, debido a la gran cantidad de IPs. \\
+En primer lugar, con los datos recolectados generamos un grafo dirigido (red\_topologia.png) para visualizar la forma de nuestra red. Los nodos contienen las IPs de las maquinas involucradas y las aristas simbolizan un mensaje ARP donde el origen de la arista es la IP solicitante y el destino la IP solicitada del mensaje. (El grafo no se incluye en el informe por su gran tama\~no, pero est'a en la carpeta con los archivos entregados).
+
+Nota: Para el siguiente an'alisis solo se expondr'an los s'imbolos m'as distinguidos basados en la informaci'on del mismo y la entrop'ia de la fuente, debido a la gran cantidad de IPs. \\
 
 \subsubsection{Modelo 1: direcciones IP destino como s'imbolos}
 
@@ -360,6 +362,12 @@ Algo particular que tambi'en se puede observar en los g'aficos, es que aparece l
 
 \section{Conclusiones}
 \label{conclusion1:}
+
+En la primera parte, las pruebas realizadas sobre el script implementado en Scapy nos permitieron conocer particularidades del ARP, como por ejemplo la posibilidad de enviar la propia IP del nodo solicitante para detectar direcciones redundantes en la red.
+
+Luego, en la segunda y tercer parte, podemos ver la utilidad del an'alisis del tr'afico de mensajes ARP para obtener informaci'on relevante de una red. El gr'afico topol'ogico que puede obtenerse con las direcciones origen y destino de los mensajes capturados, permite ver de manera simple qu'e nodos tienen un comportamiento distinguido. El an'alisis de este gr'afico, complementado con el c'alculo de la entrop'ia de los nodos, permite identificar f'acilmente al router, por ejemplo, asi como otros nodos que tengan un comportamiento anormal y que puedan perjudicar el funcionamiento de la red.
+
+Con respecto al c'alculo de la entrop'ia en los dos modelos planteados: Como vimos en la secci'on de An'alisis de Resultados, concluimos que el primero, en el que los s'imbolos son las direcciones IP destino, nos sirve para hallar los nodos m'as solicitados, entre los cuales es esperable que se encuentre el router. El segundo modelo, en cambio, nos muestra qu'e nodos tienen alta actividad en la red, y entre ellos podemos encontrar algunos con comportamiento an'omalo, como los que hallamos en la red analizada que enviaban requests ARP con su propia IP de manera cont'inua.
 
 \begin{thebibliography}{99}
 	\item Computer Networks - A Systems Approach 5th ed. - L. Peterson, et. al
