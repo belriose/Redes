@@ -69,20 +69,19 @@
 \thispagestyle{fancy}
 
 \section*{\centering Abstract}
-{\em
-Las redes inform'aticas pueden tener una complejidad tal que describir la disposici'on, participaci'on y rol de los nodos de una red sin saber nada de ella pueda ser una tarea dificil.	\\
-\indent	El objetivo de este trabajo es lograr determinar cuales son nodos distinguidos en una red y un panorama de la topolog'ia y din'amica de la misma de una manera sencilla.	\\
-\indent	En este experimento se captur'o y analiz'o el tr'afico de paquetes ARP enviados en una red empresarial en pos de lograr el objetivo. Los an'alisis realizados estan basados en histogramas de direcciones IP destino y fuente, diagramas de actividad a lo largo del tiempo, el c'alculo de la entrop'ia de la red y la informaci'on de las direcciones, y el gráfico de la red como un digrafo. Para esto se estudi'o y prob'o el protocolo ARP previamente.	\\
-\indent	Se encontr'o que si bien la mayor'ia de la red presenta un comportamiento de acuerdo al esperado de acuerdo a la teor'ia, aparecieron nodos cuyo comportamiento no solo es distinguido, si no que no se condiciona a lo esperado.	\\
-\indent	A partir de los resultados concluimos que el an'alisis de la red realizado en base a los mensajes ARP sirve para hallar nodos distinguidos en la red y obtener un panorama de la topolog'ia de la misma, no es suficiente para comprender la red y su din'amica en su totatiladad ya que se presentan fen'omenos y nodos distinguidos cuya participaci'on y rol no logramos determinar.
-}
 %~ {\em
-%~ En el presente trabajo se analizar'a el protocolo ARP. En la primera parte se muestra la implementaci'on de un cliente ARP, utilizando Scapy. Se realizan varias pruebas utilizando diferentes direcciones para ver que respuesta se obtiene. Para la segunda parte, se implementa una funci'on para escuchar pasivamente una red por un lapso de dos horas, capturando los mensajes ARP. En base a los datos recojidos, se definen dos modelos para el c'alculo de la entrop'ia de la red y se realizan gr'aficos que permiten analizarla: topol'ogico, histogramas y actividad en el tiempo. El primer modelo tiene como conjunto de s'imbolos las direcciones IP destino que aparecieron en los paquetes ARP capturados. En el segundo modelo, los s'imbolos son las direcciones de IP origen. Como resultado, se logr'o detectar varios nodos particulares: El router, algunos que s'olo realizan solicitudes con su propia IP en forma cont'inua, y otros con alta actividad.
-%~ %end italics mode
+%~ \indent	El objetivo de este trabajo es analizar de manera interactiva el protocolo ARP y lograr sacar conclusiones de los hosts en una red determinada, como determinar nodos distinguidos y un panorama de la topolog'ia y din'amica de la misma de una manera sencilla.	\\
+%~ \indent	En primera instancia se implement'o un cliente ARP y se realizaron pruebas utilizando diferentes direcciones de origen y destino para ver que respuesta se obtiene. En la segunda parte se implemento una funci'on para escuchar pasivamente una red y se captur'o y analiz'o el tr'afico de paquetes ARP enviados en una red empresarial. Los an'alisis realizados estan basados en histogramas de direcciones IP destino y fuente, diagramas de actividad a lo largo del tiempo, el c'alculo de la entrop'ia de la red y la informaci'on de las direcciones, y el tr'afico de la red como un digrafo.	\\
+%~ \indent	Como resultado se logr'o detectar varios nodos particulares, como el router y que si bien la mayor'ia de la red presenta un comportamiento de acuerdo al esperado, aparecieron nodos que no se condicionan a esto, generando un alto tr'afico o enviando constantemente un mensaje a si mismo.	\\
+%~ \indent	A partir de los resultados concluimos que el an'alisis sirve para hallar nodos distinguidos y obtener un panorama de la misma, pero no es suficiente para comprender la composici'on de la red en su totalidad.
 %~ }
+{\em
+En el presente trabajo se analizar'a el protocolo ARP. En la primera parte se muestra la implementaci'on de un cliente ARP, utilizando Scapy. Se realizan varias pruebas utilizando diferentes direcciones para ver que respuesta se obtiene. Para la segunda parte, se implementa una funci'on para escuchar pasivamente una red por un lapso de dos horas, capturando los mensajes ARP. En base a los datos recojidos, se definen dos modelos para el c'alculo de la entrop'ia de la red y se realizan gr'aficos que permiten analizarla: topol'ogico, histogramas y actividad en el tiempo. El primer modelo tiene como conjunto de s'imbolos las direcciones IP destino que aparecieron en los paquetes ARP capturados. En el segundo modelo, los s'imbolos son las direcciones de IP origen. Como resultado, se logr'o detectar varios nodos particulares: El router, algunos que s'olo realizan solicitudes con su propia IP en forma cont'inua, y otros con alta actividad.
+%end italics mode
+}
 \vspace*{5 mm}
 
-Palabras clave: red, ARP, nodos distinguidos, topolog'ia.
+Palabras clave: red, ARP, nodos distinguidos.
 
 
 \section{Introducci'on}
