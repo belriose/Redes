@@ -1,0 +1,78 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=2.5cm, top=3.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[spanish,activeacute]{babel}
+\pagestyle{fancy}
+\frenchspacing
+\usepackage[dvips]{graphicx}
+%~ \usepackage[dvips]{geometry}
+\usepackage[usenames]{color}
+\usepackage{colortbl}
+\usepackage{amssymb}
+\usepackage{caratula}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{float}
+
+\hypersetup{%
+ pdfauthor={Hernandez, Laurito, Capello},
+ pdfsubject={TP2 redes}
+}
+
+% Acomodo fancyhdr <- El encabezado de pagina
+\pagestyle{fancy}
+\thispagestyle{fancy}
+\addtolength{\headheight}{1pt}
+\lhead{Teoría de las comunicaciones - TP2}
+\rhead{Primer Cuatrimestre 2013}
+\cfoot{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%~ \lhead{\textbf{Teoría de las comunicaciones - TP2}}
+%~ \rhead{Capello - Hernandez - Laurito}
+%~ \lfoot{Taller de capa de red}
+%~ \rfoot{\thepage}
+%~ \cfoot{ }
+%~ \renewcommand{\headrulewidth}{0.6pt}
+%~ \renewcommand{\footrulewidth}{0.4pt}
+%~ \addtolength{\textwidth}{2cm}
+%~ \addtolength{\hoffset}{-0.8cm}
+%~ \fancyheadoffset{1cm}
+%~ \fancyfootoffset{1cm}
+
+\begin{document}
+
+% Caratula
+\materia{Teor'ia de las Comunicaciones}
+\submateria{Primer Cuatrimestre de 2013}
+\titulo{Tp2: capa de red}
+%\subtitulo{}
+\grupo{Grupo:}
+\integrante{Andr'es Laurito}{27/11}{andy.laurito@hotmail.com}
+\integrante{Mat\'ias Capello}{006/02}{matiascapello@gmail.com}
+\integrante{Santiago Hern'andez}{48/11}{santi-hernandez@hotmail.com}
+
+\thispagestyle{empty}
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage} 
+\newpage
+
+% Indice, indice figuras, comienzo
+\thispagestyle{fancy}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+% Secciones
+\input{abstract}
+\input{introduccion}
+\input{desarrollo}
+\input{resultados}
+\input{conclusiones}
+
+\end{document}
+
