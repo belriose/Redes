@@ -9,7 +9,4 @@ tp2.pdf: tp2.tex ./*.sty
 	rm -f *.aux *.log *.toc  *.out *.bbl *.blg *.lof *.ind *.ilg
 
 clean:
-	rm -f *.aux *.log *.toc  *.out *.bbl *.blg *.lof *.ind *.ilg
-
-borrar:
 	rm -f *.aux *.log *.toc  *.out *.bbl *.blg *.lof *.ind *.ilg *.pdf
