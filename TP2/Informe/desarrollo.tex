@@ -8,18 +8,24 @@ como esta en las diapositivas
 
 como esta en las diapositivas
 
-\subsection{Geolocalización direcciones IP}
+\subsubsection{Geolocalización direcciones IP}
 
-Uso de servicios gratuito para obtener las coordenadas terrestres de una direccion IP
+Para geolocalizar la dirección IP de las respuestas obtenidas al hacer el traceroute utilizamos el servicio gratuito provisto por \textbf{dazzlepod.com/ip} una vez obtenida la respuesta, quien nos devuelve entre otros datos, las coordenadas terrestres aproximadas de la posición de la ip en un json.
 
-\subsection{Calculo de la distancia entre coordenadas}
+\subsubsection{Calculo de la distancia entre coordenadas}
 
-Función de haversine, wikipedia
+Una vez obtenidas las coordenadas terrestres de los hops del traceroute utilizamos la \textbf{fórmula del haversine} para calcular la distancia en kilómetros entre un hop y el anterior.	\\
+Fórmula de Haversine $ = 2 * r * arcsin \left (\sqrt{sin^{2} \left (\frac{\phi_{1}-\phi_{2}}{2}\right ) + cos(\phi_{1}) * cos(\phi_{2}) * sin^{2} \left (\frac{\lambda_{1}-\lambda_{2}}{2}\right )}\right )$	\\
+Donde $r$ es el radio medio de la tierra en kilómetros (en nuestra implementación utilizamos 6371Km), $\phi_{1}$ y $\phi_{2}$ son la latitud de la coordenada 1 y 2, respectivamente, y $\lambda_{1}$ y $\lambda{2}$ son la longitud de la coordenada 1 y 2.
 
-\subsection{Calculo del RTT real y teórico}
+\subsubsection{Calculo del RTT real y teórico}
 
-Medir rtt y distancia por Vtx
+Para calcular el RTT mínimo suponiendo que los enlaces son de fibra óptico, siendo su tiempo de propagación de $2*10^{5}Km/s$, tomamos la distancia en kilómetros entre los nodos calculadas anteriormente y la dividimos por el tiempo de propagación.	\\
+\indent Por otro lado para calcular el RTT real aproximado iniciamos un contador antes de enviar el paquete y lo detenemos al obtener su respuesta correspondiente.
 
-\subsection{Gráfico mapa traceroute}
+\subsubsection{Gráfico mapa traceroute}
 
-Uso de google static maps para graficar traceroute
+Una vez terminado el traceroute utilizamos la api de \textbf{google static maps} para obtener graficamente en un mapamundi el recorrido realizado para alcanzar el destino. El servicio nos devuelve una imagen en formato png, la cual guardamos, luego de hacer un request a la dirección base de google static maps añadiendole los pins y caminos a agregar.	\\
+\indent	Para hacer el pedido utilizamos la dirección base \\http://maps.googleapis.com/maps/api/staticmap?zoom=1\&size=600x400\&scale=2\&sensor=false\&maptype=roadmap	\\
+ a la cual le agregamos para cada ip que contesto un pin: \&markers=label:\textbf{label}$|$\textbf{latidud},\textbf{longitud}, y finalmente trazamos los caminos entre las ips que contestaron una después de la otra, también agregando a la dirección \\ \&path=color:0xff0000$|$weight:2$|$ seguido de las coordenadas de cada ip separadas por un pipe ($|$).	\\
+\indent Una descripción detallada del uso de google static maps se puede encontrar en: \\ https://developers.google.com/maps/documentation/staticmaps/
