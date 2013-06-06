@@ -2,15 +2,19 @@
 
 \subsection{Implementación ping}
 
-como esta en las diapositivas
+Para la implementación de ping utilizamos scapy en python para armar y enviar un paquete ip con el destino deseado, de tipo ICMP echo request.	\\
+Al momento de enviar el paquete iniciamos un contador y al obtener respuesta lo detenemos, de forma de obtener su RTT.
 
 \subsection{Implementación traceroute}
 
-como esta en las diapositivas
+La implementación de traceroute consiste en comenzando con ttl $=$ 1, enviar tres pings a la ip destino, de forma que si el tiempo de vida del mensaje llega a cero antes de llegar al destino, el salto intermedio nos envia un mensaje informandonos que el paquete expiró. Así es que incrementando el ttl en uno sucesivamente obtenemos respuesta de los hops intermedios.	\\
+El motivo por el cual enviamos tres pings con el mismo ttl es para agregar confiabilidad a la respuesta obtenida, debido a que podríamos no obtener respuesta o el paquete podría seguir una ruta alternativa.	\\
+Para realizar los análisis pedidos en el trabajo desarrollamos un traceroute que presenta el número de cada hop en la ruta al destino, la IP del hop, su RTT, coordenadas terrestres, distancia al hop anterior, distancia hasta ese hop, el RTT teórico esperado hasta él y al finalizar el traceroute generamos un mapa mostrando el recorrido realizado por los paquetes para llegar hasta el destino.
 
 \subsubsection{Geolocalización direcciones IP}
 
-Para geolocalizar la dirección IP de las respuestas obtenidas al hacer el traceroute utilizamos el servicio gratuito provisto por \textbf{dazzlepod.com/ip} una vez obtenida la respuesta, quien nos devuelve entre otros datos, las coordenadas terrestres aproximadas de la posición de la ip en un json.
+Para geolocalizar la dirección IP de las respuestas obtenidas al hacer el traceroute utilizamos el servicio gratuito provisto por \textbf{dazzlepod.com/ip} una vez obtenida la respuesta, quien nos devuelve entre otros datos, las coordenadas terrestres aproximadas de la posición de la ip en un json.	\\
+Luego notamos que si bien este es un buen servicio las posiciones provistas no son tan precisas como el de \textbf{ip2location.com}, por lo que para gráficar la posición final de los enlaces encontrados, utilizamos este ultimo, que como desventaja solo permite una cantidad limitada de usos diarios a modo de demostración.
 
 \subsubsection{Calculo de la distancia entre coordenadas}
 
