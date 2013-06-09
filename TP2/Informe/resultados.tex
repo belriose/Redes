@@ -1,10 +1,16 @@
 \section{Resultados}
 
+Aclaraciones:	\\
+\indent	Para la obtención de los resultados hicimos traceroutes a direcciones ips pertenecientes a sitios web hosteados en Europa. También experimentamos bastante con sitios de Asia, Oceania y Africa, aunque estos no fueron utilizados para los resultados ya que no obtuvimos enlaces transatlánticos distintos a los obtenidos con los sitios Europeos y notamos un mayor tiempo de respuesta hacia estos.	\\
+\indent	Una vez obtenidos los enlaces, para obtener la variación del RTT hacia los mismos a lo largo del día realizamos 20 pings sucesivos a cada enlace, cada 1 hora, durante 24 horas, y consideramos el promedio de esos pings. En caso de obtener un timeout entre los 20 pings, dicho ping fue descartado a la hora de sacar el promedio.
+
 \subsection{Enlaces transatlánticos}
 
-%~ http://maps.googleapis.com/maps/api/staticmap?zoom=1&size=600x400&scale=2&sensor=false&maptype=roadmap&markers=label:1|37.9283,-122.0566&markers=label:2|-35.28,149.22&path=color:0xff0000|weight:2|37.9283,-122.0566|-35.28,149.22
+%~ http://maps.googleapis.com/maps/api/staticmap?zoom=1&size=600x400&scale=2&sensor=false&maptype=roadmap
+%~ 	&markers=label:1|37.9283,-122.0566
+%~ 	&markers=label:2|-35.28,149.22
+%~ 	&path=color:0xff0000|weight:2|37.9283,-122.0566|-35.28,149.22
 
-%~ \begin{figure}[!hbp]
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{enlaces.png}
@@ -12,34 +18,26 @@
 \caption{Enlaces transatlánticos} \label{figura1}
 \end{figure}
 
-%~ shonenjump.com
-%~ iceland.edu
-%~ sansebastian2016.eu	213.195.72.196
-
-%~ 34.05223, -118.24368
-%~ 39.9075, 116.39723
-
 \noindent \begin{center} \begin{tabular}{| c | c | c | c | c |} \hline 
-Pin 	 & 	 Dirección IP 	 & 	 Coordenadas 	 & 	 Distancia total recorrida hasta él en Km 	 & 	 RTT mínimo en ms \\ \hline 
-1 	 & 	 89.221.35.141 	 & 	 (37.9283,-122.0566) 	 & 	 11179.8250554 	 & 	 55.9 \\ \hline 
-2 	 & 	 202.158.194.173 	 & 	 (-35.28,149.22) 	 & 	 24234.7289268 	 & 	 121.17 \\ \hline 
-3 	 & 	  	 & 	  	 & 	  	 & 	  \\ \hline 
-4 	 & 	  	 & 	  	 & 	  	 & 	  \\ \hline 
-5 	 & 	  	 & 	  	 & 	  	 & 	  \\ \hline 
-6 	 & 	  	 & 	  	 & 	  	 & 	  \\ \hline 
+Pin 	& 	 Dirección IP 	 & 	 Coordenadas 		 & 	 Distancia total recorrida hasta él en Km 	 & 	 RTT mínimo en ms 	\\ \hline 
+1 	 	& 	  				 & 	 					 & 	 											 & 	 	 				\\ \hline 
+2 		& 	 				 & 	 				 	 & 	 			 								 & 	 		 			\\ \hline 
+3 	 	& 	 			 	 & 	  					 & 	  											 & 	 					\\ \hline 
+4 	 	& 	  				 & 	  					 & 	  											 & 	  					\\ \hline 
+5 	 	& 	  				 & 	  					 & 	  											 & 	  					\\ \hline 
+6 	 	& 	  				 & 	 				 	 & 	  											 & 	  					\\ \hline 
 %~ 3 	 & 	 195.22.199.109 	 & 	 (25.7743,-80.1937) 	 & 	 7887.31191972 	 & 	 39.44 \\ \hline 
 %~ 4 	 & 	 195.2.6.169 	 & 	 (47.0,8.0) 	 & 	 15702.4500297 	 & 	 78.51 \\ \hline 
 %~ 5 	 & 	 89.221.40.131 	 & 	 (32.7831,-96.8067) 	 & 	 9285.34331745 	 & 	 46.43 \\ \hline 
 %~ 6 	 & 	 219.158.33.189 	 & 	 (35.0,105.0) 	 & 	 21427.6048813 	 & 	 107.14 \\ \hline 
 \end{tabular} \end{center}
 
+%~ 
 \noindent \begin{center} \begin{tabular}{| c | c | c | c | c |} \hline 
 Enlace 	 &	Distancia en Km 	& 	RTT mínimo en ms	\\ \hline 
-1 - 2	 &	12222	 	 		& 	61.11				\\ \hline 
-3 - 4 	 & 		 				& 					\\ \hline 
-5 - 6 	 & 			 			&					\\ \hline 
-%~ 3 - 4 	 & 	7815.13	 			& 	39.07				\\ \hline 
-%~ 5 - 6 	 & 	12142.26 			&	60.71				\\ \hline 
+1 - 2	 &			 	 		& 						\\ \hline 
+3 - 4 	 & 		 				& 						\\ \hline 
+5 - 6 	 & 			 			&						\\ \hline 
 \end{tabular} \end{center}
 
 \subsection{Variación del RTT a lo largo del día}
@@ -48,17 +46,45 @@ Enlace 	 &	Distancia en Km 	& 	RTT mínimo en ms	\\ \hline
 \begin{center}
 \includegraphics[width=17cm]{rtts.png}
 \end{center}
-\caption{Tiempo de respuesta de los enlaces transatlánticos a lo largo del día} \label{figura1}
+\caption{Tiempo de respuesta de los enlaces transatlánticos a lo largo del día} \label{figura2}
+\end{figure}
+
+\subsection{Enlace transpacífico}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=17cm]{enlaceaustralia.png}
+\end{center}
+\caption{Enlace transpacífico} \label{figura3}
+\end{figure}
+
+\noindent \begin{center} \begin{tabular}{| c | c | c | c | c |} \hline 
+Pin 	 & 	 Dirección IP 	 & 	 Coordenadas 	 & 	 Distancia total recorrida hasta él en Km 	 & 	 RTT mínimo en ms \\ \hline 
+1 	 & 	 89.221.35.141 	 & 	 (37.9283,-122.0566) 	 & 	 11179.8250554 	 & 	 55.9 \\ \hline 
+2 	 & 	 202.158.194.173 	 & 	 (-35.28,149.22) 	 & 	 24234.7289268 	 & 	 121.17 \\ \hline 
+\end{tabular} \end{center}
+
+\noindent \begin{center} \begin{tabular}{| c | c | c | c | c |} \hline 
+Enlace 	 &	Distancia en Km 	& 	RTT mínimo en ms	\\ \hline 
+1 - 2	 &	12222	 	 		& 	61.11				\\ \hline 
+\end{tabular} \end{center}
+
+\subsection{Variación del RTT a lo largo del día}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=17cm]{rttaustralia.png}
+\end{center}
+\caption{Tiempo de respuesta del enlace a Australia a lo largo del día} \label{figura4}
 \end{figure}
 
 \subsection{Casos curiosos}
 
-%~ \begin{figure}[!hbp]
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{perfil.png}
 \end{center}
-\caption{Traceroute a perfil.com.ar} \label{figura1}
+\caption{Traceroute a perfil.com.ar} \label{figura5}
 \end{figure}
 
 En este caso al hacer un traceroute desde una dirección IP en Argentina a perfil.com.ar, un sitio web hosteado en Argentina, observamos que el tráfico primero se dirige a los Estados Unidos y luego vuelve al país para acceder al sitio.
@@ -67,7 +93,7 @@ En este caso al hacer un traceroute desde una dirección IP en Argentina a perfi
 \begin{center}
 \includegraphics[width=17cm]{newzealand.png}
 \end{center}
-\caption{Traceroute a newzealand.govt.nz} \label{figura1}
+\caption{Traceroute a newzealand.govt.nz} \label{figura6}
 \end{figure}
 
 Realizamos un traceroute a una página web en Nueva Zelanda y obtuvimos que los paquetes se dirigieron primero a Estados Unidos, luego a Asia, de ahí vuelven a Norte América para dirigirse a España. Finalmente vuelven a Estados Unidos para ser enviados a Nueva Zelanda.	\\
