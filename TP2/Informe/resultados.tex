@@ -11,6 +11,13 @@ Aclaraciones:	\\
 %~ 	&markers=label:2|-35.28,149.22
 %~ 	&path=color:0xff0000|weight:2|37.9283,-122.0566|-35.28,149.22
 
+%~ http://maps.googleapis.com/maps/api/staticmap?zoom=1&size=600x400&scale=2&sensor=false&maptype=roadmap
+%~ 	&markers=label:1|25.77427,-80.19366
+%~ 	&markers=label:2|51.50853,-0.12574
+%~ 	&markers=label:3|40.71427,-74.00597
+%~ 	&path=color:0xff0000|weight:2|25.77427,-80.19366|51.50853,-0.12574
+%~ 	&path=color:0xff0000|weight:2|40.71427,-74.00597|51.50853,-0.12574
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{enlaces.png}
@@ -18,12 +25,14 @@ Aclaraciones:	\\
 \caption{Enlaces transatlánticos} \label{figura1}
 \end{figure}
 
+A pesar de realizar muchas pruebas con traceroute a varias universidades al otro lado del Atl'antico, s'olo pudimos observar 2 enlaces transatl'anticos diferentes, uno al apuntar a la University of London, que utiliz'o un enlace entre Miami y Londres, y el otro al apuntar a la Universidade de Cabo Verde, que usa un enlace entre Nueva York y Londres. El resto de los sitios probados usaba uno esos dos enlaces, o los datos que obteniamos no eran coherentes con lo esperado por un enlace submarino.
+
 \noindent \begin{center} \begin{tabular}{| c | c | c | c | c |} \hline 
 Pin 	& 	 Dirección IP 	 & 	 Coordenadas 		 & 	 Distancia total recorrida hasta él en Km 	 & 	 RTT mínimo en ms 	\\ \hline 
-1 	 	& 	  				 & 	 					 & 	 											 & 	 	 				\\ \hline 
-2 		& 	 				 & 	 				 	 & 	 			 								 & 	 		 			\\ \hline 
-3 	 	& 	 			 	 & 	  					 & 	  											 & 	 					\\ \hline 
-4 	 	& 	  				 & 	  					 & 	  											 & 	  					\\ \hline 
+1 	 	& 	213.200.84.37  & (25.77427,-80.19366)	 & 	 			7097			 & 	 	 	35.485			\\ \hline 
+2 		& 	141.136.107.41 & (51.50853,-0.12574)	 & 	 			11130			 & 	 		55.65			\\ \hline 
+3 	 	& 	94.142.122.217 & (40.71427,-74.00597)	 & 	  		8527			 & 	 		42.635			\\ \hline 
+4 	 	& 	84.16.12.21		 & (51.50853,-0.12574)	 & 	  		11130			 & 	  	55.65				\\ \hline 
 5 	 	& 	  				 & 	  					 & 	  											 & 	  					\\ \hline 
 6 	 	& 	  				 & 	 				 	 & 	  											 & 	  					\\ \hline 
 %~ 3 	 & 	 195.22.199.109 	 & 	 (25.7743,-80.1937) 	 & 	 7887.31191972 	 & 	 39.44 \\ \hline 
@@ -35,8 +44,8 @@ Pin 	& 	 Dirección IP 	 & 	 Coordenadas 		 & 	 Distancia total recorrida hasta 
 %~ 
 \noindent \begin{center} \begin{tabular}{| c | c | c | c | c |} \hline 
 Enlace 	 &	Distancia en Km 	& 	RTT mínimo en ms	\\ \hline 
-1 - 2	 &			 	 		& 						\\ \hline 
-3 - 4 	 & 		 				& 						\\ \hline 
+1 - 2	 &			7126 	 		& 		35.63			\\ \hline 
+3 - 4 	 & 		5570 			&   	27.85			\\ \hline 
 5 - 6 	 & 			 			&						\\ \hline 
 \end{tabular} \end{center}
 
