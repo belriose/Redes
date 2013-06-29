@@ -1,0 +1,153 @@
+Cómo utilizar el código
+~~~~~~~~~~~~~~~~~~~~~~~
+
+El módulo ptc (ptc.py) define la interfaz básica a través de la cual podremos
+interactuar con la implementación del protocolo. Las clases PTCClient y
+PTCServer define, respectivamente, la interfaz del cliente y del servidor.
+Al instanciarse, reciben como argumentos una dirección IP de alguna interfaz
+y un puerto:
+
+>>> client = PTCClient('127.0.0.1', 12345)
+>>> server = PTCServer('127.0.0.1', 5555)
+
+Para iniciar una conexión, debe invocarse al método connect definido por el
+cliente. Este método recibe una dirección IP y un puerto en el que se espera
+que un servidor esté escuchando:
+
+>>> client.connect('127.0.0.1', 5555)
+
+A su vez, para aceptar conexiones, debe llamarse al método accept definido por
+el servidor:
+
+>>> server.accept()
+
+Una vez establecida la conexión, el envío y recepción de datos se da mediante
+los método send y recv. El primero de éstos recibe un string, mientras que
+el segundo recibe un número entero que indica la cantidad máxima de bytes
+que se desea recibir. Devuelve un string con, a lo sumo, esa cantidad de
+bytes:
+
+>>> client.send('hola!')
+
+>>> server.recv(10)
+'hola!'
+
+Siempre que se desee terminar una conexión, desde el cliente debe llamarse a 
+close:
+
+>>> client.close()
+
+Internamente, el cliente tiene una instancia de PTCClientProtocol en la variable
+protocol. Esta clase define el comportamiento propiamente dicho del protocolo
+del cliente, y su implementación parcial puede encontrarse en el módulo client
+(client.py). Lo análogo vale para el servidor (server.py).
+
+En caso de cerrarse la conexión en forma no voluntaria, el método last_error
+(provisto tanto por la interfaz del cliente como por la del servidor) permite
+conocer cuál fue el error que motivó el cierre. Usualmente, éste tendrá que ver
+con el envío de una cantidad superior a MAX_RETRANSMISSION_ATTEMPTS de un
+paquete dado (para el cliente) o bien con una cantidad de tiempo sin actividad
+superior a SERVER_CONNECTION_TIMEOUT (para el servidor):
+
+>>> server.last_error()
+'connection timed out'
+
+La variable error en PTCClientProtocol y PTCServerProtocol es la que debe
+definirse para determinar qué mensaje se mostrará al ejecutar last_error.
+
+
+Cliente: implementación
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Al instanciar la clase PTCClientProtocol, se genera lo siguiente:
+ * Una instancia de RetransmissionQueue en self.retransmission_queue
+ * Una instancia de DataBuffer en self.outgoing_buffer
+ * El estado actual (CLOSED) en self.state
+ * Una instancia del bloque de control (self.control_block)
+ * Una instancia de nuestra abstracción de sockets
+ * Una instancia del constructor de paquetes (self.packet_builder)
+ 
+ * Cola de retranmisión
+La RetranmissionQueue (buffers.py) contiene los paquetes enviados y aún no
+reconocidos por el servidor. El método put recibe un paquete y permite colocar
+este paquete al final de la cola. Por otro lado, el método acknowledge permite
+eliminar de la cola todo paquete cuyo #SEQ esté cubierto por el #ACK del
+paquete argumento. De superarse el tiempo RETRANSMISSION_TIMEOUT, el método
+handle_timeout del cliente será automáticamente invocado.
+Los paquetes encolados pueden iterarse utilizando el operador in:
+
+for packet in self.retransmission_queue:
+    # ...
+
+* Buffer de datos
+Al hacer send en la interfaz, eventualmente los datos terminarán colocados
+en el outgoing_buffer del cliente. La clase DataBuffer (en buffers.py) es la
+que define el comportamiento de este buffer de datos. A su vez, el servidor
+tiene su propia instancia de esta clase en donde irá depositando la información
+recibida.
+
+* Bloque de control
+El bloque de control, instancia de ClientControlBlock, contiene la lógica
+necesaria para controlar la ventana deslizante del protocolo. Sólo contiene
+la definición de las variables necesarias y el nombre de un método a definir
+(send_allowed). El resto de su funcionalidad deberá ser implementada.
+Fundamentalmente, debe poder determinarse cuándo un #ACK es aceptado y además
+poder reajustar la ventana dado un #ACK aceptado.
+
+* Inicio de conexión
+Al iniciar una conexión, el pedido de connect termina invocando al método
+connect_to de PTCClientProtocol. Allí en primer lugar se instancian
+los threads necesarios (el que maneja los eventos y el que lee el socket)
+y luego procede a enviar el SYN al servidor. El paquete respectivo se genera
+invocando al método build_packet. Éste recibe opcionalmente una lista de flags
+y un payload, y luego pasa el pedido al PacketBuilder (ver abajo para más
+detalles). Para que el thread principal quede a la espera de la conexión
+establecida, se lo hace esperar el seteo de un evento de sincronización
+(ver línea 99 en client.py). Es importante tener esto en cuenta a la hora
+de implementar la funcionalidad solicitada en handle_incoming, dado que allí
+se deberá hacer el set de este evento.
+
+
+Paquetes: construcción y manipulación
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los paquetes del protocolo se representan con instancias de la clase PTCPacket
+(en packet.py). Esta clase brinda una interfaz que permite definir el valor
+de cada campo del segmento y también de las direcciones IP involucradas:
+
+>>> packet = PTCPacket()
+>>> packet.set_source_ip('192.168.0.1')
+>>> packet.set_destination_ip('192.168.0.100')
+>>> packet.set_source_port(12345)
+>>> packet.set_destination_port(12345)
+>>> packet.set_seq_number(8989)
+>>> packet.add_flag(SYNFlag)
+>>> packet.set_payload('hola!')
+>>> packet
+From: (192.168.0.1, 12345)
+To: (192.168.0.100, 12345)
+Seq: 8989
+Ack: 0
+Flags: SYN
+Payload: hola!
+
+Para averiguar si un flag determinado está presente en un paquete, puede
+utilizarse el operador in:
+
+>>> ACKFlag in packet
+False
+>>> SYNFlag in packet
+True
+>>> FINFlag in packet
+False
+
+A los efectos de facilitar la manipulación de los paquetes, en common.py puede
+encontrarse la clase PacketBuilder. Dados payload, flags, número de secuencia
+y número de ack (todos argumentos opcionales), este constructor nos generará
+un paquete con todos los campos correctamente definidos. El método build_packet
+del cliente es el que interactúa con él.
+
+Por otro lado, el envío de un paquete puede hacerse invocando al método
+send_packet en el cliente. Éste simplemente pasa el paquete al socket para
+que lo envíe él. Además, para enviar y al mismo tiempo encolar un paquete, se 
+puede invocar a send_and_queue_packet.
