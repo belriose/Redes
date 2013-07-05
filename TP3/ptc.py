@@ -91,3 +91,7 @@ class PTCClient(PTCObject):
     def close(self):
         if self.protocol.is_connected():
             self.protocol.close()        
+            
+    def send_file(self,archivo):
+		datos = open(archivo,"rb").read()
+		self.send(datos)

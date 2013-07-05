@@ -1,6 +1,12 @@
 Cómo utilizar el código
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Agregue la funcion:
+>>>	client.send_file("archivo")
+Manda el archivo al servidor y agregue los archivos 1kb, 5kb, 10kb, 50kb, 100kb. La probe y va bien.
+>>>	client.send_file("5kb")
+Manda el archivo que se llama y pesa 5kb
+
 El módulo ptc (ptc.py) define la interfaz básica a través de la cual podremos
 interactuar con la implementación del protocolo. Las clases PTCClient y
 PTCServer define, respectivamente, la interfaz del cliente y del servidor.
