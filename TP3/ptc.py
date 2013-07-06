@@ -15,6 +15,7 @@ import random
 
 from client import PTCClientProtocol
 from server import PTCServerProtocol
+from time import clock
 
 
 class PTCObject(object):
@@ -94,4 +95,5 @@ class PTCClient(PTCObject):
             
     def send_file(self,archivo):
 		datos = open(archivo,"rb").read()
+		start_time = clock()
 		self.send(datos)

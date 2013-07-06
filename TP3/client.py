@@ -23,6 +23,9 @@ from constants import MIN_PACKET_SIZE, MAX_PACKET_SIZE, CLOSED,\
 					  ESTABLISHED, FIN_SENT, SYN_SENT, MAX_SEQ,\
 					  SEND_WINDOW, MAX_RETRANSMISSION_ATTEMPTS
 
+from time import clock
+
+start_time=0
 
 class ClientControlBlock(ProtocolControlBlock):
 	
@@ -188,6 +191,8 @@ class PTCClientProtocol(object):
 				self.retransmission_queue.clear()
 				self.retransmission_attempts.clear()
 				self.close()
+			if self.outgoing_buffer and self.retransmission_queue.empty():	#  Si recibimos el ack de lo ultimo imprimimos cuanto tardo
+				print clock() - start_time
 			
 	def handle_close_connection(self):
 		if not self.outgoing_buffer.empty():
