@@ -157,3 +157,13 @@ Por otro lado, el envío de un paquete puede hacerse invocando al método
 send_packet en el cliente. Éste simplemente pasa el paquete al socket para
 que lo envíe él. Además, para enviar y al mismo tiempo encolar un paquete, se 
 puede invocar a send_and_queue_packet.
+
+client = PTCClient('192.168.1.121', 12345)
+
+client.connect('192.168.1.145', 5555)
+
+client.send_file("1kb")
+client.send_file("5kb")
+client.send_file("10kb")
+client.send_file("50kb")
+client.send_file("100kb")

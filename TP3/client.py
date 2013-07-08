@@ -128,6 +128,7 @@ class PTCClientProtocol(object):
 		# (hacer self.shutdown() si esto ocurre y dejar un mensaje en self.error)
 		haypaquetesret = len(self.retransmission_queue.packets()) > 0
 		if haypaquetesret:
+			print "Retransmit"
 			self.retransmission_queue.__iter__()
 			primer_paquete = self.retransmission_queue.next().get_seq_number()
 			if self.retransmission_attempts.get(primer_paquete,0) >= MAX_RETRANSMISSION_ATTEMPTS:
