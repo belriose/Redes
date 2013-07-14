@@ -1,9 +1,32 @@
 \section{Desarrollo}
 
-Una vez implementado el protocolo procedimos a probarlo enviando archivos, variando el tamaño de la ventana de emisión y el tamaño del archivo.	 \\
-\indent	Las pruebas fueron realizadas en una red local con equipos conectados por wifi, realizando multiples experimentaciones para el mismo SEND\_WINDOW y tamaño de archivo.	\\
+\subsection{Implementación}
 
-\subsection{Ventana de emisión}
+Tomando como punto de partida el código suministrado por la c'atedra se completó la implementación en Python del cliente del protocolo PTC. Puntualmente, se completó lo siguiente en el archivo \texttt{client.py}:
+
+\subsubsection{M'etodo \texttt{handle\_incoming} de PTCClientProtocol}
+
+Este m'etodo es invocado cada vez que llega un paquete desde el servidor. La idea de la implementaci'on es, primero chequear si el paquete posee un \texttt{ACK}, y el mismo es v'alido. \\
+Si lo es, quitamos el paquete de la cola de retransmisi'on, y actualizamos la ventana deslizante. \\
+Luego eliminamos los paquetes que est'an en el rango del \texttt{ACK} del diccionario de intentos de retransmisi'on.  \\
+Finalmente, actualizamos el estado del cliente, en los casos que sea necesario: Si el estado era \texttt{SYN\_SENT}, se pasa a \texttt{ESTABLISHED}; y si el estado era \texttt{FIN\_SENT}, se pasa a \texttt{CLOSED}.
+
+\subsubsection{M'etodo \texttt{handle\_timeout} de PTCClientProtocol}
+
+Este m'etodo es invocado siempre que el tiempo de espera del primer paquete encolado en la cola de retransmisi'on se agota.
+
+Si hay paquetes en la cola de retransmisi'on, primero chequeamos que no se haya excedido la cantidad m'axima de reenv'ios. Si eso ocurre, cerramos la conexi'on y dejamos el mensaje de error correspondiente. Caso contrario, hacemos una copia de la cola de retransmisi'on, borramos la cola original, y a cada paquete en la copia lo reenviamos y encolamos en la cola original, actualizando el n'umero de retransmisi'on.
+
+\subsubsection{L'ogica de la clase ClientControlBlock}
+
+Esta clase maneja las variables de la ventana deslizante del protocolo. Se crearon los m'etodos necesarios para poder verificar si es posible enviar (m'etodo \texttt{send\_allowed}), para determinar si un ACK es aceptado (m'etodo \texttt{valid\_ack}) y para reajustar la ventana dado un ACK aceptado (m'etodo \texttt{update\_window}).
+
+\subsection{Experimentación}
+
+Una vez implementado el protocolo procedimos a probarlo enviando archivos, variando el tamaño de la ventana de emisión y el tamaño del archivo.	 \\
+\indent	Las pruebas fueron realizadas en una red local con equipos conectados por wifi, realizando multiples experimentaciones para el mismo SEND\_WINDOW y tamaño de archivo.
+
+\subsubsection{Ventana de emisión}
 
 La ventana de emisión es de suma importancia en el testeo y análisis del protocolo debido a la siguiente limitación: $throughput \leq SEND\_WINDOW / RTT$.	\\
 Si bien una mayor ventana de emisión nos puede permitir utilizar la capacidad completa del canal y aumentar el throughput, si es demasiado grande, esto puede conllevar desventajas: 
@@ -13,17 +36,17 @@ Si bien una mayor ventana de emisión nos puede permitir utilizar la capacidad c
 \item	La red o buffers intermedios pueden ser congestionados de forma que se pierdan paquetes.
 \end{itemize}
 
-\subsection{Tamaño del archivo}
+\subsubsection{Tamaño del archivo}
 
 Para probar la efectividad del protocolo variamos el tamaño del archivo de forma de mantener SEND\_WINDOW 
 paquetes en vuelo y ver la efectividad del protocolo cuando es utilizado en toda su capacidad por períodos largos.	\\
 \indent	Variando el tamaño del archivo esperamos, de estabilizarse o presentarse algún patrón en la taza de reenvios, connection timeouts o throughput, poder detectarlo.
 
-\subsection{Retransmiciones y connection timeouts}
+\subsubsection{Retransmiciones y connection timeouts}
 
 Un factor determinante en el desempeño del protocolo son los timeouts y la cantidad de retransmiciones realizadas debido a el impacto que tiene sobre el throughput y a que de alcanzarse los MAX RETRANSMISSION ATTEMPTS para algún paquete, la conexión es cerrada.	\\
 \indent	Por este motivo se registro la cantidad de retransmiciones realizada en cada experimento y la cantidad de veces que se alcanzaron los MAX RETRANSMISSION ATTEMPTS.
 
-\subsection{Throughput}
+\subsubsection{Throughput}
 
 Con los valores obtenidos de los experimentos realizados medimos el throughput percibido y observamos la relación entre este y las retransmiciones con el fin de determinar de que forman afectan las variables testeadas en el resultado del protocolo.
