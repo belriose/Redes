@@ -1,2 +1,7 @@
 \section{Análisis y conclusiones}
 
+Cuando medimos el throughput para una ventana fija en 10, variando el tama'no del archivo, observamos que el m'aximo est'a en un tama'no de 10kb. 
+
+En el siguiente experimento, manteniendo fijo el tama'no del archivo en 50 kb, vemos que el mayor throughput se observa con tama'no de ventana de 50 y 1, mientras que para un tama'no de 10 se obtiene el menor. Para dicha configuraci'on, analizando la cantidad de retransmisiones vemos que el pico est'a en un tama'no de ventana de 5, aunque 10 tambi'en posee un valor considerable. Esto parecer'ia tener correlaci'on con el bajo throughput percibido para estos tama'nos de ventana en el gr'afico anterior.
+
+En el 'ultimo gr'afico se observa que el porcentaje de timeouts para un tama'no de archivo fijo de 50kb, se da con un tama'no de ventana de 20. Para los valores de 1 y 10 se obtiene un porcentaje igual, mientras que para el resto de los tama'nos de ventana el porcentaje es 0. No logramos encontrar una explicaci'on para este comportamiento. 
