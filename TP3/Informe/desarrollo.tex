@@ -1,2 +1,32 @@
 \section{Desarrollo}
 
+Una vez implementado el protocolo procedimos a probarlo enviando archivos, variando el tamaño de la ventana de emisión y el tamaño del archivo.	 \\
+Las pruebas fueron realizadas en una red local con equipos conectados por wifi, realizando multiples experimentaciones para el mismo SEND\_WINDOW y tamaño de archivo.	\\
+
+\subsection{Ventana de emisión}
+
+La ventana de emisión es de suma importancia en el testeo y análisis del protocolo debido a la siguiente limitación: $throughput \leq SEND\_WINDOW / RTT$.	\\
+Si bien una mayor ventana de emisión nos puede permitir utilizar la capacidad completa del canal y aumentar el throughput, si es demasiado grande, esto puede conllevar desventajas: 
+\begin{itemize}
+\item	Al vernos obligados a mantener los segmentos no reconocidos, en caso de ser necesarios para una posible retransmición, necesitamos un RETRANSMISSION\_BUFFER más grande.
+\item	El receptor se puede ver obligado a descartar mensajes si su buffer se encuentra lleno y el emisor sigue enviando mensajes.
+\item	La red o buffers intermedios pueden ser congestionados de forma que se pierdan paquetes.
+\end{itemize}
+
+\subsection{Tamaño del archivo}
+
+Para probar la efectividad del protocolo variamos el tamaño del archivo de forma de mantener SEND\_WINDOW 
+paquetes en vuelo y ver la efectividad del protocolo cuando es utilizado en toda su capacidad por períodos largos.	\\
+Variando el tamaño del archivo esperamos, de estabilizarse o presentarse algún patrón en la taza de reenvios, connection timeouts o throughput, poder detectarlo.
+
+\subsection{Retransmiciones}
+
+
+
+\subsection{Connection timeouts}
+
+
+
+\subsection{Throughput}
+
+
