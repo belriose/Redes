@@ -1,7 +1,7 @@
 \section{Desarrollo}
 
 Una vez implementado el protocolo procedimos a probarlo enviando archivos, variando el tamaño de la ventana de emisión y el tamaño del archivo.	 \\
-Las pruebas fueron realizadas en una red local con equipos conectados por wifi, realizando multiples experimentaciones para el mismo SEND\_WINDOW y tamaño de archivo.	\\
+\indent	Las pruebas fueron realizadas en una red local con equipos conectados por wifi, realizando multiples experimentaciones para el mismo SEND\_WINDOW y tamaño de archivo.	\\
 
 \subsection{Ventana de emisión}
 
@@ -17,16 +17,13 @@ Si bien una mayor ventana de emisión nos puede permitir utilizar la capacidad c
 
 Para probar la efectividad del protocolo variamos el tamaño del archivo de forma de mantener SEND\_WINDOW 
 paquetes en vuelo y ver la efectividad del protocolo cuando es utilizado en toda su capacidad por períodos largos.	\\
-Variando el tamaño del archivo esperamos, de estabilizarse o presentarse algún patrón en la taza de reenvios, connection timeouts o throughput, poder detectarlo.
+\indent	Variando el tamaño del archivo esperamos, de estabilizarse o presentarse algún patrón en la taza de reenvios, connection timeouts o throughput, poder detectarlo.
 
-\subsection{Retransmiciones}
+\subsection{Retransmiciones y connection timeouts}
 
-
-
-\subsection{Connection timeouts}
-
-
+Un factor determinante en el desempeño del protocolo son los timeouts y la cantidad de retransmiciones realizadas debido a el impacto que tiene sobre el throughput y a que de alcanzarse los MAX RETRANSMISSION ATTEMPTS para algún paquete, la conexión es cerrada.	\\
+\indent	Por este motivo se registro la cantidad de retransmiciones realizada en cada experimento y la cantidad de veces que se alcanzaron los MAX RETRANSMISSION ATTEMPTS.
 
 \subsection{Throughput}
 
-
+Con los valores obtenidos de los experimentos realizados medimos el throughput percibido y observamos la relación entre este y las retransmiciones con el fin de determinar de que forman afectan las variables testeadas en el resultado del protocolo.
