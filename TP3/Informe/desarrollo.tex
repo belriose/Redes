@@ -29,12 +29,8 @@ Una vez implementado el protocolo procedimos a probarlo enviando archivos, varia
 \subsubsection{Ventana de emisión}
 
 La ventana de emisión es de suma importancia en el testeo y análisis del protocolo debido a la siguiente limitación: $throughput \leq SEND\_WINDOW / RTT$.	\\
-Si bien una mayor ventana de emisión nos puede permitir utilizar la capacidad completa del canal y aumentar el throughput, si es demasiado grande, esto puede conllevar desventajas: 
-\begin{itemize}
-\item	Al vernos obligados a mantener los segmentos no reconocidos, en caso de ser necesarios para una posible retransmición, necesitamos un RETRANSMISSION\_BUFFER más grande.
-\item	El receptor se puede ver obligado a descartar mensajes si su buffer se encuentra lleno y el emisor sigue enviando mensajes.
-\item	La red o buffers intermedios pueden ser congestionados de forma que se pierdan paquetes.
-\end{itemize}
+\indent	Por este motivo medimos el desempeño variando el tamaño de la ventana para observar como evoluciona la eficiencia a medida que crece, si bien la cota para el throughput va a crecer junto al SEND\_WINDOW (suponiendo que el RTT se mantiene fijo en nuestra LAN), el throughput no necesariamente debe hacerlo. \\
+\indent	Esperamos que una vez alcanzado cierto throughput, el aumento del SEND\_WINDOW no este ligado a un incremento aún mayor del throughput debido a que la red en si misma cuenta con limitaciones en cuanto al ancho de banda, velocidad, buffers, etc. 
 
 \subsubsection{Tamaño del archivo}
 

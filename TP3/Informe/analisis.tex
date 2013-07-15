@@ -1,7 +1,20 @@
 \section{Análisis y conclusiones}
 
 Cuando medimos el throughput para una ventana fija en 10, variando el tama'no del archivo, observamos que el m'aximo est'a en un tama'no de 10kb. 
+\newline
 
-En el siguiente experimento, manteniendo fijo el tama'no del archivo en 50 kb, vemos que el mayor throughput se observa con tama'no de ventana de 50 y 1, mientras que para un tama'no de 10 se obtiene el menor. Para dicha configuraci'on, analizando la cantidad de retransmisiones vemos que el pico est'a en un tama'no de ventana de 5, aunque 10 tambi'en posee un valor considerable. Esto parecer'ia tener correlaci'on con el bajo throughput percibido para estos tama'nos de ventana en el gr'afico anterior.
+En el siguiente experimento, manteniendo fijo el tama'no del archivo en 50 kb, vemos que el mayor throughput se observa con tama'no de ventana de 50 y 1, mientras que para un tama'no de 10 se obtiene el menor. Para dicha configuraci'on, analizando la cantidad de retransmisiones vemos que el pico est'a en un tama'no de ventana de 5, aunque 10 tambi'en posee un valor considerable. Esto parecer'ia tener correlaci'on con el bajo throughput percibido para estos tama'nos de ventana en el gr'afico anterior.	
+\newline
 
-En el 'ultimo gr'afico se observa que el porcentaje de timeouts para un tama'no de archivo fijo de 50kb, se da con un tama'no de ventana de 20. Para los valores de 1 y 10 se obtiene un porcentaje igual, mientras que para el resto de los tama'nos de ventana el porcentaje es 0. No logramos encontrar una explicaci'on para este comportamiento. 
+En cuanto a la ventana de emisión, si bien una mayor ventana nos puede permitir llegar a utilizar la capacidad completa del canal y aumentar el throughput, si es demasiado grande, esto puede conllevar desventajas: 
+\begin{itemize}
+\item	Al vernos obligados a mantener los segmentos no reconocidos, en caso de ser necesarios para una posible retransmición, necesitamos un RETRANSMISSION\_BUFFER más grande.
+\item	El receptor se puede ver obligado a descartar mensajes si su buffer se encuentra lleno y el emisor sigue enviando mensajes.
+\item	La red o buffers intermedios pueden ser congestionados de forma que se pierdan paquetes.
+\end{itemize}
+
+Esta relación entre una mayor ventana de emisión y un decremento en el throughput se puede observar una vez superado el punto de quiebre de la SEND\_WINDOW $=$ 50, obteniendo un throughput de aproximadamente un 40$\%$ del máximo, duplicando la SEND\_WINDOW a 100.
+\newline
+
+En el 'ultimo gr'afico se observa que el porcentaje de timeouts para un tama'no de archivo fijo de 50kb, se da con un tama'no de ventana de 20. Para los valores de 1 y 10 se obtiene un porcentaje igual, mientras que para el resto de los tama'nos de ventana el porcentaje es 0. No logramos encontrar una explicaci'on para este comportamiento aunque sospechamos que se debe a la red en la que se realizaron las pruebas. 
+
